@@ -4,7 +4,7 @@ import CadastrandoFuncionarioController from './controller/funcionario/Cadastrad
 const routes = Router()
 
 
-routes.get('/cadastro/funcionario', CadastrandoFuncionarioController);
+routes.post('/cadastro/funcionario', CadastrandoFuncionarioController);
 
 
 export default routes;

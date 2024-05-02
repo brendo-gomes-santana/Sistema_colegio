@@ -18,7 +18,7 @@ model Funcionario {
   id String @id @default(uuid())
   nome_completo String
   data_de_nascimento DateTime
-  contato Int
+  contato String
   email String
   senha String
   ativo Boolean @default(true)

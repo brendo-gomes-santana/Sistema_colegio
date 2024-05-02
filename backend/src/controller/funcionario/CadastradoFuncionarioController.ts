@@ -1,16 +1,21 @@
 import { Request, Response } from 'express';
+import CadastroFuncionarioServer from '../../server/funcionario/CadastroFuncionarioServer';
 
-interface PropsFuncionario{
+export interface PropsFuncionario{
     nome_completo: string;
     data_de_nascimento: Date;
-    contato: number;
+    contato: string;
     email: string;
+}
+
+export interface RetornoComId extends PropsFuncionario{
+    id: string;
+    ativo: boolean;
 }
 
 async function CadastrandoFuncionarioController(
     req: Request, res: Response
 ) {
-
 
     const { 
         nome_completo,
@@ -19,9 +24,14 @@ async function CadastrandoFuncionarioController(
         contato
      } = req.body as PropsFuncionario;
 
-     
+    const criando = await CadastroFuncionarioServer({
+        contato,
+        data_de_nascimento,
+        email,
+        nome_completo
+    }) as RetornoComId | Error
 
-   return res.json({ok: true})
+   return res.json(criando);
 
 }
 
