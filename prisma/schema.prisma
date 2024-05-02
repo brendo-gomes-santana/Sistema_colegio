@@ -1,0 +1,152 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Funcionario {
+  id String @id @default(uuid())
+  nome_completo String
+  data_de_nascimento DateTime
+  contato Int
+  email String
+  senha String
+  ativo Boolean @default(true)
+
+  Funcionario_funcao Funcionario_funcao[]
+  turmas Turma[]
+
+  @@map("funcionarios")
+}
+
+model Funcionario_funcao {
+  id String @id @default(uuid())
+
+  funcionario Funcionario @relation(fields: [id_funcionario], references: [id])
+  id_funcionario String
+
+  funcao funcao @relation(fields: [id_funcao], references: [id])
+  id_funcao String
+
+  @@map("funcionarios_funcoes")
+}
+
+model funcao {
+  id String @id @default(uuid())
+  nome String
+
+  Funcionario_funcao Funcionario_funcao[]
+
+  @@map("Funcoes")
+}
+
+
+
+model Aluno {
+  id String @id @default(uuid())
+  matricula String @unique
+  nome_completo String
+  data_de_nascimento DateTime
+  nome_pai_completo String?
+  nome_mae_completo String?
+  matriculado Boolean @default(true)
+
+  turmas Aluno_turma[]
+  presencas Presenca[]
+  notas Notas[]
+
+  @@map("alunos")
+}
+
+model Disciplinas {
+  id String @id @default(uuid())
+  nome String
+
+  turma Turma[]
+
+  @@map("disciplinas")
+}
+
+
+model Turma {
+  id String @id @default(uuid())
+  nome String
+  turno String
+  ano Int
+  disciplina String
+  funcionario Funcionario @relation(fields: [id_funcionario], references: [id])
+  id_funcionario  String
+
+  disciplinas Disciplinas @relation(fields: [id_disciplina], references: [id])
+  id_disciplina String
+
+  alunos       Aluno_turma[]
+  presencas    Presenca[]
+  notas        Notas[]
+
+  @@map("turmas")
+}
+
+model Aluno_turma {
+  id      String @id @default(uuid())
+  aluno    Aluno  @relation(fields: [id_aluno], references: [id])
+  id_aluno  String
+  turma    Turma  @relation(fields: [id_turma], references: [id])
+  id_turma  String
+
+  @@unique([id_aluno, id_turma])
+
+  @@map("alunos_turmas")
+}
+
+// Presenca model
+model Presenca {
+  id String @id @default(uuid())
+
+  aluno     Aluno     @relation(fields: [id_aluno], references: [id])
+  id_aluno   String
+  
+  turma     Turma     @relation(fields: [id_turma], references: [id])
+  id_turma   String
+  
+  data      DateTime
+  presente  Boolean
+  descricao String?
+
+  @@map("presencas")
+}
+
+// Notas model
+model Notas {
+  id String @id @default(uuid())
+  
+  aluno Aluno @relation(fields: [id_aluno], references: [id])
+  id_aluno String
+  
+  turma Turma @relation(fields: [id_turma], references: [id])
+  id_turma String
+  
+  bimestre Int
+
+  av1 Float?
+  av2 Float?
+  av3 Float?
+  media Float?
+  recuperacao Float?
+  media_final Float?
+
+  faltas Int?
+
+  @@map("notas")
+}
+
