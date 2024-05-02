@@ -47,7 +47,7 @@ model funcao {
 
   Funcionario_funcao Funcionario_funcao[]
 
-  @@map("Funcoes")
+  @@map("funcoes")
 }
 
 
