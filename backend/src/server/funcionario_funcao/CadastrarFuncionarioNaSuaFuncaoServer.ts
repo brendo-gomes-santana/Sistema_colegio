@@ -58,6 +58,11 @@ async function CadastrarFuncionarioNaSuaFuncaoServer({
             }))
         })
 
+
+        return {
+            message: 'Funções Cadastrada no usuário'
+        }
+        
     }catch(err){
         console.log(err);
         throw new Error('Algo deu errado')
