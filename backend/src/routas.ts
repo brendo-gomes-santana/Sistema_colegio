@@ -4,6 +4,7 @@ import Router from 'express';
 import CadastrandoFuncionarioController from './controller/funcionario/CadastradoFuncionarioController';
 import SessaoFuncionarioController from './controller/funcionario/SessaoFuncionarioController';
 import ListaDeFuncionarioController from './controller/funcionario/ListaDeFuncionarioControler';
+import DetalheDoFuncionarioController from './controller/funcionario/DetalheDoFuncionarioController';
 
 //IMPORTAÇÃO DAS FUNÇÕES
 import CriarFuncaoController from './controller/funcao/CriarFuncaoController';
@@ -20,11 +21,13 @@ routes.post('/sessao', SessaoFuncionarioController);
 
 //FUNCIONÁRIO
 routes.post('/cadastro/funcionario', CadastrandoFuncionarioController);
-routes.get('/lista/funcionario/', ListaDeFuncionarioController)
+routes.get('/lista/funcionario', ListaDeFuncionarioController);
+routes.get('/detalhes/funcionario', DetalheDoFuncionarioController);
 
 //FUNCÃO
 routes.post('/cadastra/funcao', CriarFuncaoController);
 routes.get('/lista/funcao', ListaFuncaoController);
+
 //FUNÇÃO NO FUNCIONÁRIO
 routes.post('/cadastrar/funcao/funcionario', CadastrarFuncionarioNaSuaFuncaoController);
 routes.delete('/deletar/funcao/funcionario', DeletarFuncaoDoFuncionarioController);

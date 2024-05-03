@@ -20,6 +20,17 @@ async function ListaDeFuncionarioServer(page: number, ativo: boolean) {
             where: {
                 ativo: ativo
             },
+            select: {
+                id: true,
+                nome_completo: true,
+                data_de_nascimento: true,
+                contato: true,
+                Funcionario_funcao: {
+                    select: {
+                        funcao: true
+                    }
+                }
+            },
             orderBy: {
                 nome_completo: "asc"
             },
@@ -33,9 +44,7 @@ async function ListaDeFuncionarioServer(page: number, ativo: boolean) {
         };
     
     }else{
-        return {
-            mensagem: "não possui funcionário"
-        }
+        return []
     }
 
 
