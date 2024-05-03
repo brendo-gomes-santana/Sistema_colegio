@@ -24,6 +24,6 @@ routes.post('/cadastra/funcao', CriarFuncaoController);
 routes.get('/lista/funcao', ListaFuncaoController);
 
 //FUNÇÃO NO FUNCIONÁRIO
-routes.post('cadastrar/funcao/funcionario', CadastrarFuncionarioNaSuaFuncaoController);
+routes.post('/cadastrar/funcao/funcionario', CadastrarFuncionarioNaSuaFuncaoController);
 
 export default routes;

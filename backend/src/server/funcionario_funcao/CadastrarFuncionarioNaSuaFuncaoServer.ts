@@ -49,8 +49,6 @@ async function CadastrarFuncionarioNaSuaFuncaoServer({
     }
 
     try{
-
-
         await prisma.funcionario_funcao.createMany({
             data: id_funcoes.map(funcao => ({
                 id_funcionario: id_usuario,
@@ -58,7 +56,7 @@ async function CadastrarFuncionarioNaSuaFuncaoServer({
             }))
         })
 
-
+    
         return {
             message: 'Funções Cadastrada no usuário'
         }
