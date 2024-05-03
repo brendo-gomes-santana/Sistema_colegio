@@ -8,7 +8,7 @@ async function DetalheDoFuncionarioServer(id_funcionario: string) {
     }
 
 
-    const DetalheDoFuncionario = await prisma.funcionario.findUnique({
+    const funcionario = await prisma.funcionario.findUnique({
         where: {
             id: id_funcionario
         },
@@ -22,11 +22,11 @@ async function DetalheDoFuncionarioServer(id_funcionario: string) {
         }
     })
 
-    if (!DetalheDoFuncionario) {
+    if (!funcionario) {
         throw new Error("Usuário não existe")
     }
 
-    const funcoes = DetalheDoFuncionario.Funcionario_funcao.map(funcoes => {
+    const funcoes = funcionario.Funcionario_funcao.map(funcoes => {
         return {
             id: funcoes.funcao.id,
             nome: funcoes.funcao.nome
@@ -34,12 +34,12 @@ async function DetalheDoFuncionarioServer(id_funcionario: string) {
     })
 
     return {
-        id: DetalheDoFuncionario.id,
-        nome_completo: DetalheDoFuncionario.nome_completo,
-        contato: DetalheDoFuncionario.contato,
-        nascimento: DetalheDoFuncionario.data_de_nascimento,
-        email: DetalheDoFuncionario.email,
-        ativo: DetalheDoFuncionario.ativo,
+        id: funcionario.id,
+        nome_completo: funcionario.nome_completo,
+        contato: funcionario.contato,
+        nascimento: funcionario.data_de_nascimento,
+        email: funcionario.email,
+        ativo: funcionario.ativo,
         funcoes
     };
 
