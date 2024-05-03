@@ -10,6 +10,7 @@ import ListaFuncaoController from './controller/funcao/ListaFuncaoController';
 
 //IMPORTAÇÃO FUNÇÃO NO FUNCIONÁRIO
 import CadastrarFuncionarioNaSuaFuncaoController from './controller/funcionario_funcao/CadastrarFuncionarioNaSuaFuncaoController';
+import DeletarFuncaoDoFuncionarioController from './controller/funcionario_funcao/DeletarFuncaoDoFuncionarioController';
 
 const routes = Router()
 
@@ -25,5 +26,6 @@ routes.get('/lista/funcao', ListaFuncaoController);
 
 //FUNÇÃO NO FUNCIONÁRIO
 routes.post('/cadastrar/funcao/funcionario', CadastrarFuncionarioNaSuaFuncaoController);
+routes.delete('/deletar/funcao/funcionario', DeletarFuncaoDoFuncionarioController);
 
 export default routes;
