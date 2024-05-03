@@ -16,7 +16,15 @@ async function SessaoFuncionarioServer({ email, senha }: PropsSessao): Promise<P
 
     const funcionario = await prisma.funcionario.findFirst({
         where: {
-            email: email
+            email: email,
+            ativo: true
+        },
+        include: {
+            Funcionario_funcao: {
+                select: {
+                    id_funcao: true
+                }
+            }
         }
     })
 
@@ -32,8 +40,7 @@ async function SessaoFuncionarioServer({ email, senha }: PropsSessao): Promise<P
 
     const token = sign(
         {
-            nome: funcionario.nome_completo,
-            email: funcionario.email
+            permissoes: funcionario.Funcionario_funcao.map(permissao => { return permissao.id_funcao})
         },
         process.env.JWT as string,
         {
@@ -41,7 +48,7 @@ async function SessaoFuncionarioServer({ email, senha }: PropsSessao): Promise<P
             expiresIn: '30d'
         }
     )
-  
+    
 
     return {
         id: funcionario.id as string,
