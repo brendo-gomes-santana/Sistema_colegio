@@ -14,11 +14,15 @@ import ListaFuncaoController from './controller/funcao/ListaFuncaoController';
 import CadastrarFuncionarioNaSuaFuncaoController from './controller/funcionario_funcao/CadastrarFuncionarioNaSuaFuncaoController';
 import DeletarFuncaoDoFuncionarioController from './controller/funcionario_funcao/DeletarFuncaoDoFuncionarioController';
 
+
+import auth from './middleware/auth';
+import permissao from './middleware/permissoes';
 const routes = Router()
 
 
 routes.post('/sessao', SessaoFuncionarioController);
 
+routes.use(auth)
 //FUNCIONÁRIO
 routes.post('/cadastro/funcionario', CadastrandoFuncionarioController);
 routes.get('/lista/funcionario', ListaDeFuncionarioController);
@@ -26,7 +30,9 @@ routes.get('/detalhes/funcionario', DetalheDoFuncionarioController);
 
 //FUNCÃO
 routes.post('/cadastra/funcao', CriarFuncaoController);
-routes.get('/lista/funcao', ListaFuncaoController);
+routes.get('/lista/funcao', 
+    permissao(['Professor']),
+    ListaFuncaoController);
 
 //FUNÇÃO NO FUNCIONÁRIO
 routes.post('/cadastrar/funcao/funcionario', CadastrarFuncionarioNaSuaFuncaoController);
