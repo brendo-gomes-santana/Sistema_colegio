@@ -23,7 +23,7 @@ async function CadastroFuncionarioServer({
     })){
         throw new Error('Funcionário já possui cadastro!')
     }
-
+    
     try{
         const criado = await prisma.funcionario.create({
             data: {
