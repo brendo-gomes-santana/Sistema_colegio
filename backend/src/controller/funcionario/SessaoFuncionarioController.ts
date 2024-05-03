@@ -19,12 +19,10 @@ export interface PropsReturnoSessao{
 async function SessaoFuncionarioController(req: Request, res: Response) {
 
     const { email, senha } = req.body as PropsSessao;
-
-
+    
     const sessao = await SessaoFuncionarioServer({email, senha}) as PropsReturnoSessao
 
     return res.json(sessao);
-
 }
 
 
