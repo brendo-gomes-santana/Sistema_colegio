@@ -6,6 +6,7 @@ import SessaoFuncionarioController from './controller/funcionario/SessaoFunciona
 
 //IMPORTAÇÃO DAS FUNÇÕES
 import CriarFuncaoController from './controller/funcao/CriarFuncaoController';
+import ListaFuncaoController from './controller/funcao/ListaFuncaoController';
 
 const routes = Router()
 
@@ -17,5 +18,6 @@ routes.post('/cadastro/funcionario', CadastrandoFuncionarioController);
 
 //FUNCÃO
 routes.post('/cadastra/funcao', CriarFuncaoController);
+routes.get('/lista/funcao', ListaFuncaoController);
 
 export default routes;
