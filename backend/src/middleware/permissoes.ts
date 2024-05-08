@@ -37,10 +37,9 @@ function permissao(permissao: string[]){
                 error: "usuário não possui as funções"
             })
         }
-        console.log(funcionario);
-        /*
+        
         const funcaoExiste = funcionario.Funcionario_funcao
-        .map(funcao => funcao.id_funcao)
+        .map(funcao => funcao.funcao.nome)
         .some(funcao => permissao.includes(funcao))
         
         if(!funcaoExiste){
@@ -49,7 +48,7 @@ function permissao(permissao: string[]){
                 error: "Você não tem permissão"
             })
         }
-        */
+    
         return next()
     }
 }

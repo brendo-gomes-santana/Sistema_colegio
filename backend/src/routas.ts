@@ -31,7 +31,7 @@ routes.get('/detalhes/funcionario', DetalheDoFuncionarioController);
 //FUNCÃO
 routes.post('/cadastra/funcao', CriarFuncaoController);
 routes.get('/lista/funcao', 
-    permissao(['Professor']),
+    permissao(['Secretaria']),
     ListaFuncaoController);
 
 //FUNÇÃO NO FUNCIONÁRIO
