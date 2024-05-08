@@ -6,6 +6,7 @@ import SessaoFuncionarioController from './controller/funcionario/SessaoFunciona
 import ListaDeFuncionarioController from './controller/funcionario/ListaDeFuncionarioControler';
 import DetalheDoFuncionarioController from './controller/funcionario/DetalheDoFuncionarioController';
 import MinhaInformacoesControler from './controller/funcionario/MinhaInformacoesController';
+import DesativarOuAtivarFuncionarioController from './controller/funcionario/DesativarOuAtivarFuncionarioController';
 
 //IMPORTAÇÃO DAS FUNÇÕES
 import CriarFuncaoController from './controller/funcao/CriarFuncaoController';
@@ -49,6 +50,9 @@ routes.get('/detalhes/funcionario',
 
 routes.get('/me', MinhaInformacoesControler);
 
+routes.patch('/ativar_desativar/funcionario', 
+    permissao(['Administrador']),
+    DesativarOuAtivarFuncionarioController)
 //FUNCÃO
 routes.post('/cadastra/funcao', 
     permissao(['Administrador']),

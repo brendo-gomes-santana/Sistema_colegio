@@ -25,6 +25,7 @@ async function ListaDeFuncionarioServer(page: number, ativo: boolean) {
                 nome_completo: true,
                 data_de_nascimento: true,
                 contato: true,
+                ativo: true,
                 Funcionario_funcao: {
                     select: {
                         funcao: true
