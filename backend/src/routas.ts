@@ -5,6 +5,7 @@ import CadastrandoFuncionarioController from './controller/funcionario/Cadastrad
 import SessaoFuncionarioController from './controller/funcionario/SessaoFuncionarioController';
 import ListaDeFuncionarioController from './controller/funcionario/ListaDeFuncionarioControler';
 import DetalheDoFuncionarioController from './controller/funcionario/DetalheDoFuncionarioController';
+import MinhaInformacoesControler from './controller/funcionario/MinhaInformacoesController';
 
 //IMPORTAÇÃO DAS FUNÇÕES
 import CriarFuncaoController from './controller/funcao/CriarFuncaoController';
@@ -17,25 +18,53 @@ import DeletarFuncaoDoFuncionarioController from './controller/funcionario_funca
 
 import auth from './middleware/auth';
 import permissao from './middleware/permissoes';
+
 const routes = Router()
 
+ /*
+Administrador
+Coordenadora
+Secretaria
+Professor
+ */
 
 routes.post('/sessao', SessaoFuncionarioController);
 
-routes.use(auth)
+routes.use(auth);
+
+
+
 //FUNCIONÁRIO
-routes.post('/cadastro/funcionario', CadastrandoFuncionarioController);
-routes.get('/lista/funcionario', ListaDeFuncionarioController);
-routes.get('/detalhes/funcionario', DetalheDoFuncionarioController);
+routes.post('/cadastro/funcionario', 
+    permissao(['Administrador']),
+    CadastrandoFuncionarioController);
+
+routes.get('/lista/funcionario', 
+    permissao(['Administrador', 'Coordenadora', 'Secretaria']),
+    ListaDeFuncionarioController);
+
+routes.get('/detalhes/funcionario', 
+    permissao(['Administrador', 'Coordenadora']),
+    DetalheDoFuncionarioController);
+
+routes.get('/me', MinhaInformacoesControler);
 
 //FUNCÃO
-routes.post('/cadastra/funcao', CriarFuncaoController);
+routes.post('/cadastra/funcao', 
+    permissao(['Administrador']),
+    CriarFuncaoController);
+
 routes.get('/lista/funcao', 
-    permissao(['Secretaria']),
+    permissao(['Administrador']),
     ListaFuncaoController);
 
 //FUNÇÃO NO FUNCIONÁRIO
-routes.post('/cadastrar/funcao/funcionario', CadastrarFuncionarioNaSuaFuncaoController);
-routes.delete('/deletar/funcao/funcionario', DeletarFuncaoDoFuncionarioController);
+routes.post('/cadastrar/funcao/funcionario', 
+    permissao(['Administrador']),
+    CadastrarFuncionarioNaSuaFuncaoController);
+    
+routes.delete('/deletar/funcao/funcionario', 
+    permissao(['Administrador']),
+    DeletarFuncaoDoFuncionarioController);
 
 export default routes;
