@@ -7,6 +7,7 @@ import ListaDeFuncionarioController from './controller/funcionario/ListaDeFuncio
 import DetalheDoFuncionarioController from './controller/funcionario/DetalheDoFuncionarioController';
 import MinhaInformacoesControler from './controller/funcionario/MinhaInformacoesController';
 import DesativarOuAtivarFuncionarioController from './controller/funcionario/DesativarOuAtivarFuncionarioController';
+import DeletarFuncionarioController from './controller/funcionario/DeletarFuncionarioController';
 
 //IMPORTAÇÃO DAS FUNÇÕES
 import CriarFuncaoController from './controller/funcao/CriarFuncaoController';
@@ -31,9 +32,8 @@ Professor
 
 routes.post('/sessao', SessaoFuncionarioController);
 
+
 routes.use(auth);
-
-
 
 //FUNCIONÁRIO
 routes.post('/cadastro/funcionario', 
@@ -52,7 +52,12 @@ routes.get('/me', MinhaInformacoesControler);
 
 routes.patch('/ativar_desativar/funcionario', 
     permissao(['Administrador']),
-    DesativarOuAtivarFuncionarioController)
+    DesativarOuAtivarFuncionarioController);
+
+routes.delete('/deletar/funcionario', 
+    permissao(['Administrador']),
+    DeletarFuncionarioController);
+
 //FUNCÃO
 routes.post('/cadastra/funcao', 
     permissao(['Administrador']),

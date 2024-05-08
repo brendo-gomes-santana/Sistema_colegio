@@ -14,7 +14,8 @@ async function CadastrarFuncionarioNaSuaFuncaoServer({
     const [funcionario, funcao, possui] = await Promise.all([
         prisma.funcionario.findUnique({
             where: {
-                id: id_usuario
+                id: id_usuario,
+                ativo: true
             }
         }),
         prisma.funcao.findMany({
@@ -38,7 +39,7 @@ async function CadastrarFuncionarioNaSuaFuncaoServer({
         throw new Error('usuário já possui essa(s) permissão(ões).')
     }
     if(!funcionario){
-        throw new Error('Funcionário não encontrado.')
+        throw new Error('Funcionário não encontrado, ou foi desligado da empresa.')
     }
 
     const idsEncontrados = funcao.map(funcao => funcao.id);
