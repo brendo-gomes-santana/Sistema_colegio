@@ -13,10 +13,12 @@ import DeletarFuncionarioController from './controller/funcionario/DeletarFuncio
 import CriarFuncaoController from './controller/funcao/CriarFuncaoController';
 import ListaFuncaoController from './controller/funcao/ListaFuncaoController';
 
-//IMPORTAÇÃO FUNÇÃO NO FUNCIONÁRIO
+//IMPORTAÇÃO FUNÇÃO DO FUNCIONÁRIO
 import CadastrarFuncionarioNaSuaFuncaoController from './controller/funcionario_funcao/CadastrarFuncionarioNaSuaFuncaoController';
 import DeletarFuncaoDoFuncionarioController from './controller/funcionario_funcao/DeletarFuncaoDoFuncionarioController';
 
+//IMPORTAÇAO DAS DISCIPLINAS
+import CadastrarDisciplinaController from './controller/disciplina/cadastrarDisciplinaController';
 
 import auth from './middleware/auth';
 import permissao from './middleware/permissoes';
@@ -76,4 +78,9 @@ routes.delete('/deletar/funcao/funcionario',
     permissao(['Administrador']),
     DeletarFuncaoDoFuncionarioController);
 
+// DISCIPLINAS
+routes.post('/cadastrar/disciplina',
+        permissao(['Administrador']),
+        CadastrarDisciplinaController
+)
 export default routes;
