@@ -35,7 +35,6 @@ Professor
 
 routes.post('/sessao', SessaoFuncionarioController);
 
-
 routes.use(auth);
 
 //FUNCIONÁRIO
