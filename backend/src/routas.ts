@@ -23,6 +23,7 @@ import listaDisciplinaController from './controller/disciplina/listaDisciplinaCo
 
 //IMPORTAÇAO DAS TURMAS
 import cadastrarTurmaController from './controller/turma/cadastrarTurmaController';
+import listaTurmasController from './controller/turma/listaTurmaController';
 
 import auth from './middleware/auth';
 import permissao from './middleware/permissoes';
@@ -96,5 +97,10 @@ routes.get('/lista/disciplina',
 routes.post('/cadastrar/turma',
     permissao(['Administrador']),
     cadastrarTurmaController
+);
+
+routes.get('/lista/turma',
+    permissao(['Administrador', 'Professor', 'Secretaria', 'Coordenadora']),
+    listaTurmasController
 )
 export default routes;

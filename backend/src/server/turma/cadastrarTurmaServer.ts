@@ -34,7 +34,7 @@ async function cadastrarTurmaServer({
     ])
 
     if(!funcionario){
-        throw new Error('funcionário nao existe ou ele nao tem a permissao ter ser professor.')
+        throw new Error('funcionário nao existe ou não possui o cargo de professor.')
     }
 
     if(!disciplina){
