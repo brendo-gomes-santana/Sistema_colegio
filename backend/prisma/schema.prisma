@@ -83,7 +83,6 @@ model Turma {
   nome String
   turno String
   ano Int
-  disciplina String
   funcionario Funcionario @relation(fields: [id_funcionario], references: [id])
   id_funcionario  String
 

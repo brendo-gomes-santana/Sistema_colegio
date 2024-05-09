@@ -21,8 +21,12 @@ import DeletarFuncaoDoFuncionarioController from './controller/funcionario_funca
 import CadastrarDisciplinaController from './controller/disciplina/cadastrarDisciplinaController';
 import listaDisciplinaController from './controller/disciplina/listaDisciplinaController';
 
+//IMPORTAÇAO DAS TURMAS
+import cadastrarTurmaController from './controller/turma/cadastrarTurmaController';
+
 import auth from './middleware/auth';
 import permissao from './middleware/permissoes';
+
 
 const routes = Router()
 
@@ -86,5 +90,11 @@ routes.post('/cadastrar/disciplina',
 routes.get('/lista/disciplina', 
     permissao(['Administrador', 'Coordenadora', 'Secretaria']),
     listaDisciplinaController
+)
+
+// TURMAS
+routes.post('/cadastrar/turma',
+    permissao(['Administrador']),
+    cadastrarTurmaController
 )
 export default routes;
