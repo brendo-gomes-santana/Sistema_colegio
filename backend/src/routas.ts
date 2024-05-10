@@ -26,6 +26,9 @@ import cadastrarTurmaController from './controller/turma/cadastrarTurmaControlle
 import listaTurmasController from './controller/turma/listaTurmaController';
 import alterarTurmaController from './controller/turma/alterarTurmaController';
 
+//IMPORTANÇÃO DOS ALUNOS
+import cadastrarAlunoController from './controller/aluno/cadastrarAlunoController';
+
 import auth from './middleware/auth';
 import permissao from './middleware/permissoes';
 
@@ -91,23 +94,24 @@ routes.post('/cadastrar/disciplina',
 
 routes.get('/lista/disciplina', 
     permissao(['Administrador', 'Coordenadora', 'Secretaria']),
-    listaDisciplinaController
-)
+    listaDisciplinaController);
 
 // TURMAS
 routes.post('/cadastrar/turma',
     permissao(['Administrador']),
-    cadastrarTurmaController
-);
+    cadastrarTurmaController);
 
 routes.get('/lista/turma',
     permissao(['Administrador', 'Professor', 'Secretaria', 'Coordenadora']),
-    listaTurmasController
-)
+    listaTurmasController);
 
 routes.patch('/alterar/turma', 
     permissao(['Administrador', 'Coordenadora']),
-    alterarTurmaController
-);
+    alterarTurmaController);
+
+//ALUNOS
+routes.post('cadastrar/aluno',
+    permissao(['Administrador', 'Coordenadora', 'Secretaria']),
+    cadastrarAlunoController);
 
 export default routes;

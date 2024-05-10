@@ -57,6 +57,8 @@ model Aluno {
   matricula String @unique
   nome_completo String
   data_de_nascimento DateTime
+  endereco String
+  cep String
   nome_pai_completo String?
   nome_mae_completo String?
   matriculado Boolean @default(true)
