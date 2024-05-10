@@ -20,7 +20,7 @@ async function SessaoFuncionarioController(req: Request, res: Response) {
 
     const { email, senha } = req.body as PropsSessao;
     
-    const sessao = await SessaoFuncionarioServer({email, senha}) as PropsReturnoSessao
+    const sessao = await SessaoFuncionarioServer({email, senha})
 
     return res.json(sessao);
 }

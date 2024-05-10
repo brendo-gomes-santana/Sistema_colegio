@@ -1,19 +1,27 @@
 import prisma from "../../prisma";
 import { sign } from "jsonwebtoken";
 import { compare } from "bcryptjs";
+import { z } from "zod";
+import { sessaoFuncionarioSchema } from "../../schema/FuncionarioSchema";
 
 import dotenv from 'dotenv';
 dotenv.config()
 
-import { PropsSessao, PropsReturnoSessao } from "../../controller/funcionario/SessaoFuncionarioController";
+export type SessaoFuncionario = z.infer<typeof sessaoFuncionarioSchema>
 
-async function SessaoFuncionarioServer({ email, senha }: PropsSessao): Promise<PropsReturnoSessao | Error> {
+async function SessaoFuncionarioServer({ email, senha }: SessaoFuncionario){
 
-    if (email === '' || senha === '') {
-        throw new Error('Preenchar as informações')
+
+    const validacao = sessaoFuncionarioSchema.safeParse({email, senha})
+
+    
+    if(!validacao.success){
+        const messagemDeError = validacao.error.issues.map(item => {return item.message}).join(' | ');
+
+        throw new Error(messagemDeError);
     }
-
-
+    
+    
     const funcionario = await prisma.funcionario.findFirst({
         where: {
             email: email,
@@ -58,7 +66,6 @@ async function SessaoFuncionarioServer({ email, senha }: PropsSessao): Promise<P
         data_de_nascimento: funcionario.data_de_nascimento as Date,
         token
     }
-
 }
 
 export default SessaoFuncionarioServer;
