@@ -7,13 +7,14 @@ import { sessaoFuncionarioSchema } from "../../schema/FuncionarioSchema";
 import dotenv from 'dotenv';
 dotenv.config()
 
-export type SessaoFuncionario = z.infer<typeof sessaoFuncionarioSchema>
+export type TypeSessaoFuncionario = z.infer<typeof sessaoFuncionarioSchema>
 
-async function SessaoFuncionarioServer({ email, senha }: SessaoFuncionario){
+async function SessaoFuncionarioServer({ email, senha }: TypeSessaoFuncionario){
 
     const validacao = sessaoFuncionarioSchema.safeParse({email, senha})
 
     if(!validacao.success){
+        validacao.error.issues[0].message
         throw new Error(validacao.error.issues[0].message);
     }
     

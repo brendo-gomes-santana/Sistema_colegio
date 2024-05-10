@@ -1,6 +1,5 @@
 import prisma from "../../prisma";
 
-
 async function ListaDeFuncionarioServer(page: number, ativo: boolean) {
 
     const limite = 10;

@@ -1,19 +1,28 @@
 import prisma from '../../prisma';
 import { hash } from 'bcryptjs';
+import { z } from 'zod';
+import { cadastrarFuncionarioSchema } from '../../schema/FuncionarioSchema';
 
 require('dotenv').config();
 
-import { PropsFuncionario, RetornoComId } from '../../controller/funcionario/CadastradoFuncionarioController';
+export type TypeCadastrarFuncionario = z.infer<typeof cadastrarFuncionarioSchema>;
 
 async function CadastroFuncionarioServer({
     nome_completo,
     email,
     data_de_nascimento,
     contato
-}:PropsFuncionario): Promise<RetornoComId | Error> {
+}:TypeCadastrarFuncionario){
 
-    if(nome_completo === '' || email === '' || !data_de_nascimento || !contato){
-        throw new Error('Preenchar as informações')
+    const validacao = cadastrarFuncionarioSchema.safeParse({
+        nome_completo,
+        email,
+        data_de_nascimento,
+        contato 
+    })
+
+    if(!validacao.success){
+        throw new Error(validacao.error.issues[0].message);
     }
 
     if(await prisma.funcionario.findFirst({
