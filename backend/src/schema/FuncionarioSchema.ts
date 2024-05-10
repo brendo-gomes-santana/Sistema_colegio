@@ -7,6 +7,7 @@ export const cadastrarFuncionarioSchema = z.object({
     data_de_nascimento: z.string()
 })
 
+
 export const sessaoFuncionarioSchema = z.object({
     email: z.string().email('Coloque um email válido'),
     senha: z.string().min(1, 'Preenchar o campo senha')
