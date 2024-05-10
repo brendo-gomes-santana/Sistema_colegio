@@ -17,7 +17,6 @@ async function SessaoFuncionarioServer({ email, senha }: SessaoFuncionario){
         throw new Error(validacao.error.issues[0].message);
     }
     
-
     const funcionario = await prisma.funcionario.findFirst({
         where: {
             email: email,
