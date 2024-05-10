@@ -12,6 +12,8 @@ app.use(cors());
 
 app.use('/v1', routes)
 
+
+
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     if(err instanceof Error){
         return res.status(400).json({
@@ -19,7 +21,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
         })
     }
     return res.status(500).json({
-        status: 'error',
+        status: 'error',    
         message: 'Internal server error'
     })
 })

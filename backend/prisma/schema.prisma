@@ -17,7 +17,7 @@ datasource db {
 model Funcionario {
   id String @id @default(uuid())
   nome_completo String
-  data_de_nascimento DateTime
+  data_de_nascimento DateTime @db.Date
   contato String
   email String
   senha String
@@ -56,7 +56,7 @@ model Aluno {
   id String @id @default(uuid())
   matricula String @unique
   nome_completo String
-  data_de_nascimento DateTime
+  data_de_nascimento DateTime @db.Date
   endereco String
   cep String
   nome_pai_completo String?
@@ -120,7 +120,7 @@ model Presenca {
   turma     Turma     @relation(fields: [id_turma], references: [id])
   id_turma   String
   
-  data      DateTime
+  data      DateTime @db.Date
   presente  Boolean
   descricao String?
 
