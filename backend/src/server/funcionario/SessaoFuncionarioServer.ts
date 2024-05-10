@@ -11,17 +11,13 @@ export type SessaoFuncionario = z.infer<typeof sessaoFuncionarioSchema>
 
 async function SessaoFuncionarioServer({ email, senha }: SessaoFuncionario){
 
-
     const validacao = sessaoFuncionarioSchema.safeParse({email, senha})
 
-    
     if(!validacao.success){
-        const messagemDeError = validacao.error.issues.map(item => {return item.message}).join(' | ');
-
-        throw new Error(messagemDeError);
+        throw new Error(validacao.error.issues[0].message);
     }
     
-    
+
     const funcionario = await prisma.funcionario.findFirst({
         where: {
             email: email,
